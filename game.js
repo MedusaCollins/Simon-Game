@@ -6,8 +6,12 @@ var randomNumber = Math.floor(Math.random() * 4);
 var randomChosenColour = buttonColours[randomNumber];
 var audio = new Audio('');
 var userChosenColour = '';
+var gameStarted = false;
+var level = 0;
 
 function nextSequence(){
+    level++;
+    $("h1").text("Level " + level)
     randomNumber = Math.floor(Math.random() * 4);
     randomChosenColour = buttonColours[randomNumber];
     gamePattern.push(buttonColours[randomNumber])
@@ -30,9 +34,16 @@ function playSound(sound){
 }
 
 function animatePress(currentColour){
-    console.log(currentColour)
 $("." + currentColour).addClass("pressed")
+
 setTimeout(function(){
     $("." + currentColour).removeClass("pressed")
 }, 100)
 }
+
+$(document).keypress(function (e) { 
+    if(!gameStarted){
+        nextSequence();
+        gameStarted = true;
+    }
+});

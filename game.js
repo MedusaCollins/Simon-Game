@@ -60,5 +60,13 @@ if( gamePattern[currentLevel] === userClickedPattern[currentLevel]){
           }, 1000);
           console.log("checkAnswer")
     }
-}else{ console.log("Başarısız")}
+}else{
+    var wrong = new Audio("sounds/wrong.mp3")
+    wrong.play();
+    $("body").addClass("game-over");
+    $("h1").text("Game Over, Press Any Key to Restart");
+    setTimeout(function(){
+        $("body").removeClass("game-over");
+    }, 200)
+}
 }

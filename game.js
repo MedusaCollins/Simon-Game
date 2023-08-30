@@ -16,7 +16,6 @@ function nextSequence(){
     playSound(randomChosenColour)
 
     $("#"+ randomChosenColour).fadeOut().fadeIn();
-    console.log("nextSequence")
 }
 $(".btn").click(function (e) {
     userChosenColour = e.target.id;
@@ -27,7 +26,6 @@ $(".btn").click(function (e) {
 
       //2. Call checkAnswer() after a user has clicked and chosen their answer, passing in the index of the last answer in the user's sequence.
     checkAnswer(userClickedPattern.length-1);
-    console.log("click")
 })
 
 function playSound(sound){
@@ -58,7 +56,7 @@ if( gamePattern[currentLevel] === userClickedPattern[currentLevel]){
         setTimeout(function () {
             nextSequence();
           }, 1000);
-          console.log("checkAnswer")
+
     }
 }else{
     var wrong = new Audio("sounds/wrong.mp3")
@@ -67,6 +65,12 @@ if( gamePattern[currentLevel] === userClickedPattern[currentLevel]){
     $("h1").text("Game Over, Press Any Key to Restart");
     setTimeout(function(){
         $("body").removeClass("game-over");
-    }, 200)
-}
+    }, 200);
+    startOver();
+}}
+
+function startOver(){
+    level = 0;
+    gamePattern = [];
+    gameStarted = false;
 }
